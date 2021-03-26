@@ -3,16 +3,16 @@ package rpm_java;
 import java.util.Objects;
 
 public class Book {
-    private static int idCounter = 0;
-    final int id = ++idCounter;
+    private int id;
     private String title;
     private String author;
-    private int pages;
+    private int year;
 
-    public Book(String title, String author, int pages) {
+    public Book(int id, String title, String author, int year) {
+        this.id = id;
         this.title = title;
         this.author = author;
-        this.pages = pages;
+        this.year = year;
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && pages == book.pages && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+        return id == book.id && year == book.year && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, pages);
+        return Objects.hash(id, title, author, year);
     }
 
     @Override
@@ -34,17 +34,10 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", pages=" + pages +
+                ", pages=" + year +
                 '}';
     }
 
-    public static int getIdCounter() {
-        return idCounter;
-    }
-
-    public static void setIdCounter(int idCounter) {
-        Book.idCounter = idCounter;
-    }
 
     public int getId() {
         return id;
@@ -66,11 +59,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getPages() {
-        return pages;
+    public int getYear() {
+        return year;
     }
 
-    public void setPages(int pages) {
-        this.pages = pages;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

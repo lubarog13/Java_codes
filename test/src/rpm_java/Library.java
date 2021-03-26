@@ -2,75 +2,35 @@ package rpm_java;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Library {
-    private String title;
+    private int id;
     private String address;
     private List<Book> books;
-    private Map<String, Integer> bookCase;
+    public Library(){}
 
-    public Library(String title, String address, List<Book> books, Map<String, Integer> bookCase) {
-        this.title = title;
+    public Library(int id, String address, List<Book> books) {
+        this.id = id;
         this.address = address;
         this.books = books;
-        this.bookCase = bookCase;
     }
-    public boolean hasBook(String title){
 
-        return bookCase.containsKey(title);
-    }
-    public Book takeBook(String title){
-        for ( String s: bookCase.keySet() ){
-            if (s.equals(title)){
-                if (bookCase.get(s)==1){
-                    bookCase.remove(s);
-                    books.removeIf(book -> book.getTitle().equals(title));
-                }
-                else {
-                    bookCase.replace(s, bookCase.get(s), bookCase.get(s) - 1);
-                }
-                for(Book book: books){
-                    if (title.equals(book.getTitle())) return book;
-                }
-            }
-
-        }
-        return null;
-    }
-    public void addBook(Book book){
-        boolean hasbook = false;
-        for (Book b: books){
-            if (b.getTitle().equals(title)) hasbook=true;
-        }
-        if(!hasbook){
-            books.add(book);
-            bookCase.put(book.getTitle(), 1);
-        }
-        else {
-            bookCase.replace(book.getTitle(), bookCase.get(book.getTitle())+1);
-        }
-    }
-    public int bookCount(String title){
-        Integer a = bookCase.get(title);
-        if(a==null) return 0;
-        else return a;
-    }
     @Override
     public String toString() {
         return "Library{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
                 ", address='" + address + '\'' +
                 ", books=" + books +
-                ", bookCase=" + bookCase +
                 '}';
     }
 
-    public String getTitle() {
-        return title;
+    public int getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -88,12 +48,31 @@ public class Library {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
+    public void readBook() throws BookReadException{
+        Scanner scanner = new Scanner(System.in);
+        int counter = 0;
+        System.out.println("Введите количество книг");
+        try {
+            int n = Integer.parseInt(scanner.nextLine());
 
-    public Map<String, Integer> getBookCase() {
-        return bookCase;
-    }
-
-    public void setBookCase(Map<String, Integer> bookCase) {
-        this.bookCase = bookCase;
+        for(int i=0; i<n; i++){
+            System.out.println("Введите информацию о книге");
+            Integer id = Integer.parseInt(scanner.nextLine());
+            String name = scanner.nextLine();
+            String author = scanner.nextLine();
+            Integer year = Integer.parseInt(scanner.nextLine());
+            try{
+            if(name.length()<=3 || name.length()>=33) throw new BookReadException("Введено неправильное название");
+            if(author.length()<=3||author.length()>=30) throw new BookReadException("Введен неправильный автор");
+            if(year<=-3350||year>=2022) throw new BookReadException("Введен неправильный год");}
+            catch (BookReadException e){
+                System.out.println(e);
+                continue;
+            }
+            books.add(new Book(id, name, author, year));
+            counter++;
+        }
+        System.out.println("Введено " + counter + " книг из " + n);}
+        catch (NumberFormatException e){ throw new BookReadException("Введено не число");}
     }
 }

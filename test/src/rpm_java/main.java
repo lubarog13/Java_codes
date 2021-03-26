@@ -1,4 +1,6 @@
 package rpm_java;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class main {
@@ -58,19 +60,30 @@ public class main {
         System.out.println(school.getBuildingType().getRus());
         school.workAll();
         System.out.println(school.nextYearAll());*/
-        Book book1 =new Book("Сказка о царе Салтане", "Пушкин", 100);
-        Book book2 = new Book("Евгений Онегин", "Пушкин", 200);
-        Book book3 = new Book("Мцыри", "Лермонтов", 50);
-        Map<String, Integer> map = new HashMap<>();
+        Book book1 =new Book(1, "Сказка о царе Салтане", "Пушкин", 1820);
+        Book book2 = new Book(2, "Евгений Онегин", "Пушкин", 1821);
+        Book book3 = new Book(3, "Мцыри", "Лермонтов", 1830);
+        /*Map<String, Integer> map = new HashMap<>();
         map.put("Сказка о царе Салтане", 1);
-        map.put("Евгений Онегин", 5);
-        Library library =new Library("Школа №5", "ул. Устинова, 12", new ArrayList<Book>(Arrays.asList(book1, book2)), map);
-        System.out.println(library.hasBook("Евгений Онегин"));
-        library.addBook(book3);
-        System.out.println(library);
-        System.out.println(library.takeBook("Сказка о царе Салтане"));
-        System.out.println(library);
-        System.out.println(library.bookCount("Мцыри"));
-        System.out.println(library.hasBook("Сказка о царе Салтане"));
+        map.put("Евгений Онегин", 5);*/
+        Library library =new Library(1, "ул. Устинова, 12", new ArrayList<Book>(Arrays.asList(book1, book2, book3)));
+
+        File file = new File("library.txt");
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Library library2 = new Library();
+        try{
+        FileUtils.write(file, library);
+        library2 = FileUtils.read(file);}
+        catch (IOException e){
+            System.out.println(e);
+        }
+        System.out.println(library2);
+
     }
 }
