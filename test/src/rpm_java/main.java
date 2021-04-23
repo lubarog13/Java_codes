@@ -66,7 +66,7 @@ public class main {
         /*Map<String, Integer> map = new HashMap<>();
         map.put("Сказка о царе Салтане", 1);
         map.put("Евгений Онегин", 5);*/
-        Library library =new Library(1, "ул. Устинова, 12", new ArrayList<Book>(Arrays.asList(book1, book2, book3)));
+        /*Library library =new Library(1, "ул. Устинова, 12", new ArrayList<Book>(Arrays.asList(book1, book2, book3)));
 
         File file = new File("library.txt");
         if(!file.exists()){
@@ -83,7 +83,28 @@ public class main {
         catch (IOException e){
             System.out.println(e);
         }
-        System.out.println(library2);
-
+        System.out.println(library2);*/
+        Random random = new Random();
+        Integer arr[] = new Integer[10];
+        Character ch[] = {'S', 'c', 'J', 'd', 'h'};
+        for ( int i=0;i<10;i++ ){
+            arr[i]= random.nextInt();
+        }
+        BubbleSortinger<Integer> bubbleSortinger = new BubbleSortinger<>();
+        System.out.println(bubbleSortinger.sortWithTime(arr));
+        for ( int i=0; i<10;i++ ){
+        System.out.print(arr[i]+" ");}
+        System.out.println();
+        String s[] = {"gbvr", "fve", "fvber", "bvdfbf"};
+        InsertionSort<String> insertionSort = new InsertionSort<>();
+        System.out.println(insertionSort.sortWithTime(s));
+        for ( int i=0; i<s.length;i++ ){
+            System.out.print(s[i]+" ");}
+        System.out.println();
+        SelectionSorrtinger<Character> selectionSorrtinger = new SelectionSorrtinger<>();
+        System.out.println(selectionSorrtinger.sortWithTime(ch));
+        for ( int i=0; i<ch.length;i++ ){
+            System.out.print(ch[i] + " ");}
+        System.out.println();
     }
 }
