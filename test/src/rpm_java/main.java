@@ -85,26 +85,21 @@ public class main {
         }
         System.out.println(library2);*/
         Random random = new Random();
-        Integer arr[] = new Integer[10];
-        Character ch[] = {'S', 'c', 'J', 'd', 'h'};
-        for ( int i=0;i<10;i++ ){
+        Integer arr[] = new Integer[10000];
+        for ( int i=0;i<10000;i++ ){
             arr[i]= random.nextInt();
         }
         BubbleSortinger<Integer> bubbleSortinger = new BubbleSortinger<>();
         System.out.println(bubbleSortinger.sortWithTime(arr));
-        for ( int i=0; i<10;i++ ){
-        System.out.print(arr[i]+" ");}
-        System.out.println();
-        String s[] = {"gbvr", "fve", "fvber", "bvdfbf"};
-        InsertionSort<String> insertionSort = new InsertionSort<>();
-        System.out.println(insertionSort.sortWithTime(s));
-        for ( int i=0; i<s.length;i++ ){
-            System.out.print(s[i]+" ");}
-        System.out.println();
-        SelectionSorrtinger<Character> selectionSorrtinger = new SelectionSorrtinger<>();
-        System.out.println(selectionSorrtinger.sortWithTime(ch));
-        for ( int i=0; i<ch.length;i++ ){
-            System.out.print(ch[i] + " ");}
-        System.out.println();
+        for ( int i=0;i<10000;i++ ){
+            arr[i]= random.nextInt();
+        }
+        InsertionSort<Integer> insertionSort = new InsertionSort<>();
+        System.out.println(insertionSort.sortWithTime(arr));
+        for ( int i=0;i<10000;i++ ){
+            arr[i]= random.nextInt();
+        }
+        SelectionSorrtinger<Integer> selectionSorrtinger = new SelectionSorrtinger<>();
+        System.out.println(selectionSorrtinger.sortWithTime(arr));
     }
 }
